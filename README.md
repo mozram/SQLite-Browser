@@ -1,0 +1,2 @@
+# SQLite Browser
+SQlite database has many encryption implementation, one of it 128bit RSA, which is used by System.Data.Sqlite. This program allows user to open standard unencrypted database or encrypted database created by System.Data.Sqlite. For encrypted database, the current password of the database is needed to open the database.
