@@ -85,7 +85,7 @@ namespace SQLiteBrowser
                 }
                 catch (SQLiteException ex)
                 {
-                    System.Windows.MessageBox.Show(ex.Message, "DB error INT", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                    System.Windows.MessageBox.Show(ex.Message, "Query error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                     //L.og("ERROR: " + ex.Message);
                 }
             }
@@ -232,8 +232,9 @@ namespace SQLiteBrowser
                         fda.Fill(ds);
                     }
                 }
-                catch (SQLiteException)
+                catch (SQLiteException ex)
                 {
+                    MessageBox.Show(ex.Message.ToString(), "SQL Syntax Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return null;
                 }
             }

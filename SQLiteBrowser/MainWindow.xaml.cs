@@ -24,6 +24,7 @@ namespace SQLiteBrowser
     public partial class MainWindow : Window
     {
         DataSet ds;
+        DB db;
         private string currentCell { get; set; }
 
         public MainWindow()
@@ -61,15 +62,7 @@ namespace SQLiteBrowser
                 }
             }
 
-            DB db = new DB();
-            SQLiteDataReader rd = db.QueryResult("select name from sqlite_master");
-            while(rd.Read())
-            {
-                if (!rd["name"].ToString().Contains("sqlite"))
-                {
-                    cboxTable.Items.Add(rd["name"].ToString());
-                }
-            }
+            refreshTable();   
 
             this.Title = "SQLite Browser - " + DB.db_path;
 
@@ -81,8 +74,23 @@ namespace SQLiteBrowser
             cboxTable.IsEnabled = true;
         }
 
+        private void refreshTable()
+        {
+            cboxTable.Items.Clear();
+            db = new DB();
+            SQLiteDataReader rd = db.QueryResult("select name from sqlite_master");
+            while (rd.Read())
+            {
+                if (!rd["name"].ToString().Contains("sqlite"))
+                {
+                    cboxTable.Items.Add(rd["name"].ToString());
+                }
+            }
+        }
+
         private void cboxTable_DropDownClosed(object sender, EventArgs e)
         {
+            if (cboxTable.SelectedIndex == -1) return;
             string sql = "select * from " + cboxTable.SelectedItem.ToString();
             ds = DB.QueryDataset(sql);
             lstDB.ItemsSource = ds.Tables[0].DefaultView;
@@ -99,7 +107,7 @@ namespace SQLiteBrowser
             string firstColumn = row[0].ToString();
 
             //apply changes to database
-            string query = "update " + cboxTable.Text + " set " + selectedHeader + "='" + text + "' where " + header + "='" + firstColumn + "' and " + selectedHeader + "='" + currentCell + "'";
+            string query = "update " + cboxTable.Text + " set `" + selectedHeader + "`='" + text + "' where `" + header + "`='" + firstColumn + "' and `" + selectedHeader + "`='" + currentCell + "'";
             DB.Query(query);
         }
 
@@ -141,8 +149,16 @@ namespace SQLiteBrowser
             InputDialog input = new InputDialog("Custom SQLite Command", "Enter SQLite command: ");
             if (input.ShowDialog() == false)
                 return;
-            string sql = input.Text;
-            DB.Query(sql);
+            string sql = input.Text.ToLower();
+            if (sql.Substring(0, 6).ToLower() == "select")
+            {
+                ds = DB.QueryDataset(sql);
+                if (ds != null)
+                    lstDB.ItemsSource = ds.Tables[0].DefaultView;
+            }
+            else DB.Query(sql);
+
+            refreshTable();
         }
 
         private void lstDB_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

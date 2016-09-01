@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SQLiteBrowser"
         mc:Ignorable="d"
-        Title="InputDialog" Height="153.308" Width="372.794" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="resources/database.ico">
+        Title="InputDialog" Height="328.308" Width="544.794" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="resources/database.ico">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height=".15*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height=".15*" />
         </Grid.RowDefinitions>
-        
+
         <Label Name="lblTitle" Content="Title for input :"/>
-        <TextBox x:Name="txtInput" Grid.Row="1" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300"/>
+        <TextBox x:Name="txtInput" Grid.Row="1" HorizontalAlignment="Center" Height="230" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" Margin="10,0"/>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
