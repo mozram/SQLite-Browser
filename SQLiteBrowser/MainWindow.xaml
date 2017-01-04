@@ -14,7 +14,7 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="90"/>
             <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="140"/>
             <ColumnDefinition Width="382*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -22,12 +22,12 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="261*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btnopenDB" Content="Open DB" Click="openDB_Click" Grid.ColumnSpan="1"/>
-        <Button x:Name="btnCloseDB" Content="Close DB" Grid.Column="2" Click="btnCloseDB_Click" Grid.ColumnSpan="1"/>
-        <Button x:Name="btnDeleteRow" Content="Delete Record" Grid.Column="4" Click="btnDeleteRow_Click" Grid.ColumnSpan="1"/>
-        <Button x:Name="btnExecuteSql" Content="Run SQLite Command" Grid.Column="6" Click="btnExecuteSql_Click" Grid.ColumnSpan="1"/>
+        <Button x:Name="btnopenDB" Content="Open DB" Click="openDB_Click" Grid.ColumnSpan="1" Margin="3,3,3,3"/>
+        <Button x:Name="btnCloseDB" Content="Close DB" Grid.Column="2" Click="btnCloseDB_Click" Grid.ColumnSpan="1" Margin="3,3,3,3"/>
+        <Button x:Name="btnDeleteRow" Content="Delete Record" Grid.Column="4" Click="btnDeleteRow_Click" Grid.ColumnSpan="1" Margin="3,3,3,3"/>
+        <Button x:Name="btnExecuteSql" Content="Run SQLite Command" Grid.Column="6" Click="btnExecuteSql_Click" Grid.ColumnSpan="1" Margin="3,3,3,3"/>
         <Label Content="Table: " Grid.Row="1"/>
-        <ComboBox x:Name="cboxTable" Grid.Row="1" Grid.Column="1" DropDownClosed="cboxTable_DropDownClosed" Grid.ColumnSpan="7"/>
+        <ComboBox x:Name="cboxTable" Grid.Row="1" Grid.Column="1" DropDownClosed="cboxTable_DropDownClosed" Grid.ColumnSpan="7" Margin="2,2,2,2"/>
         <DataGrid x:Name="lstDB" Grid.Row="2" Grid.ColumnSpan="8" CellEditEnding="lstDB_CellEditEnding" CanUserReorderColumns="True" CanUserResizeColumns="True" 
           CanUserResizeRows="False" CanUserSortColumns="True" AlternatingRowBackground="Gainsboro"  AlternationCount="2" BeginningEdit="lstDB_BeginningEdit" AutoGeneratingColumn="lstDB_AutoGeneratingColumn"/>
 

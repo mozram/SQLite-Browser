@@ -107,16 +107,21 @@ namespace SQLiteBrowser
             string firstColumn = row[0].ToString();
 
             //apply changes to database
-            string query = "update " + cboxTable.Text + " set `" + selectedHeader + "`='" + text + "' where `" + header + "`='" + firstColumn + "' and `" + selectedHeader + "`='" + currentCell + "'";
+            string query = "update " + cboxTable.Text + " set `" + selectedHeader.Replace("__","_") + "`='" + text + "' where `" + header + "`='" + firstColumn + "' and `" + selectedHeader.Replace("__", "_") + "`='" + currentCell + "'";
             DB.Query(query);
         }
 
         private void lstDB_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
         {
-            string header = e.Column.Header.ToString();
+            // Get initial value            
+            int index = e.Column.DisplayIndex;
+            //DataRowView row = (DataRowView)lstDB.SelectedItems[0];
+            //currentCell = row[header].ToString();
 
-            DataRowView row = (DataRowView)lstDB.SelectedItems[0];
-            currentCell = row[header].ToString();
+            //DataGrid dataGrid = sender as DataGrid;
+            DataGridRow row = (DataGridRow)lstDB.ItemContainerGenerator.ContainerFromIndex(lstDB.SelectedIndex);
+            DataGridCell RowColumn = lstDB.Columns[index].GetCellContent(row).Parent as DataGridCell;
+            currentCell = ((TextBlock)RowColumn.Content).Text;
         }
 
         private void btnDeleteRow_Click(object sender, RoutedEventArgs e)
